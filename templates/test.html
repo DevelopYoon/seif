@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트할게~</title>
+    <script>
+        async function updateUserData(event) {
+                                                    event.preventDefault();
+
+                                                    // 세션에서 access 토큰 가져오기
+                                                    const accessToken = sessionStorage.getItem('access');
+                                                    
+                                                    // 폼 입력값 가져오기
+                                                    const title = document.getElementById('title').value;
+                                                    const stringData = document.getElementById('string_data').value;
+
+                                                    // 요청 데이터 및 헤더 확인
+                                                    const requestData = {
+                                                        title: title,
+                                                        string_data: stringData
+                                                    };
+
+                                                    const requestHeaders = {
+                                                        'Content-Type': 'application/json',
+                                                        'Authorization': `Bearer ${accessToken}`  // Bearer 토큰 방식으로 접근 토큰 포함
+                                                    };
+
+                                                    // 콘솔에 요청 데이터와 헤더 출력
+                                                    console.log('Sending request with headers:', requestHeaders);
+                                                    console.log('Request body:', requestData);
+                                                    alert('Sending request with headers: ' + JSON.stringify(requestHeaders) + '\nRequest body: ' + JSON.stringify(requestData));
+
+                                                    try {
+                                                        // 요청 보내기
+                                                        const response = await fetch('http://211.237.0.230:10123/update/update_User/', {
+                                                            method: 'PATCH',  // PATCH 메서드로 설정
+                                                            headers: requestHeaders,
+                                                            body: JSON.stringify(requestData)
+                                                        });
+
+                                                        // 응답 처리
+                                                        const data = await response.json();
+                                                        if (response.ok) {
+                                                            alert('데이터가 성공적으로 업데이트되었습니다.');
+                                                        } else {
+                                                            alert('업데이트 실패: ' + data.message);
+                                                        }
+                                                    } catch (error) {
+                                                        console.error('Error:', error);
+                                                        alert('요청 중 오류 발생');
+                                                    }
+                                                }
+    async function probdetail(event) {
+                                                    event.preventDefault();
+
+                                                    // 세션에서 access 토큰 가져오기
+                                                    const accessToken = sessionStorage.getItem('access');
+                                                    
+                                                    // 폼 입력값 가져오기
+                                                    const co_Num = document.getElementById('co_Num').value;
+                                                    const dangerSolutionAfter = document.getElementById('dangerSolutionAfter').value;
+                                                    const dangerSolutionBefore = document.getElementById('dangerSolutionBefore').value;
+                                                    const record = document.getElementById('record').value;
+                                                    const pic_before = document.getElementById('pic_before').value;
+                                                    const place = document.getElementById('place').value;
+                                                    const workStep = document.getElementById('workStep').value;
+                                                    const frequency = document.getElementById('frequency').value;
+                                                    const strength = document.getElementById('strength').value;
+                                                    const riskScore = document.getElementById('riskScore').value;
+                                                    const writer = document.getElementById('writer').value;
+                                                    const work = document.getElementById('work').value;
+                                                    const is_last = document.getElementById('is_last').value;
+                                                   
+                                                    // 요청 데이터 및 헤더 확인
+                                                    const requestData =  {
+    
+    co_Num: co_Num,
+    dangerSolutionAfter: dangerSolutionAfter,
+    dangerSolutionBefore: dangerSolutionBefore,
+    record:record,
+    pic_before: pic_before,
+    place: place,
+    workStep: workStep,
+    frequency:frequency ,
+    strength: strength,
+    riskScore: riskScore,
+    writer:writer ,
+    work:work ,
+    is_last:is_last 
+};
+                                                   
+                                                    const requestHeaders = {
+                                                        'Content-Type': 'application/json',
+                                                        'Authorization': `Bearer ${accessToken}`  // Bearer 토큰 방식으로 접근 토큰 포함
+                                                    };
+
+                                                    // 콘솔에 요청 데이터와 헤더 출력
+                                                    console.log('Sending request with headers:', requestHeaders);
+                                                    console.log('Request body:', requestData);
+                                                    alert('Sending request with headers: ' + JSON.stringify(requestHeaders) + '\nRequest body: ' + JSON.stringify(requestData));
+
+                                                    try {
+                                                        // 요청 보내기
+                                                        const response = await fetch('http://211.237.0.230:10123/create/CreateProblemDetail/', {
+                                                            method: 'post',  // PATCH 메서드로 설정
+                                                            headers: requestHeaders,
+                                                            body: JSON.stringify(requestData)
+                                                        });
+
+                                                        // 응답 처리
+                                                        const data = await response.json();
+                                                        if (response.ok) {
+                                                            alert('데이터가 성공적으로 업데이트되었습니다.');
+                                                        } else {
+                                                            alert('업데이트 실패: ' + data.message);
+                                                        }
+                                                    } catch (error) {
+                                                        console.error('Error:', error);
+                                                        alert('요청 중 오류 발생');
+                                                    }
+                                                }
+async function login(event) {
+    event.preventDefault();
+
+    // 사용자 입력값 가져오기
+    const userId = document.getElementById('user_id').value;
+    const password = document.getElementById('password').value;
+
+    // 로그인 데이터 확인
+    const loginData = {
+        user_id: userId,
+        password: password
+    };
+
+    // 콘솔에 로그인 데이터 출력
+    console.log('Sending login data:', loginData);
+    alert('Sending login data: ' + JSON.stringify(loginData));
+
+    try {
+        // 로그인 요청 보내기
+        const response = await fetch('http://211.237.0.230:10123/register/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(loginData)
+        });
+
+        // 응답 데이터 처리
+        const data = await response.json();
+        if (response.ok) {
+            // 세션에 저장
+            sessionStorage.setItem('message', data.message);
+            sessionStorage.setItem('access', data.access);
+            sessionStorage.setItem('refresh', data.refresh);
+            sessionStorage.setItem('CEO_permission', data.CEO_permission);
+            sessionStorage.setItem('safe_permission', data.safe_permission);
+            sessionStorage.setItem('co_Num', data.co_Num);
+            sessionStorage.setItem('username', data.username);
+            sessionStorage.setItem('email', data.email);
+            sessionStorage.setItem('Tel', data.Tel);
+
+        } else {
+            alert('로그인 실패: ' + data.message);
+        }    alert('로그인 성공: ' + data.message);
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('로그인 중 오류 발생');
+    }
+}
+    </script>
+</head>
+<body>
+    <h1>로그인</h1>
+    <form onsubmit="login(event)">
+        <label for="user_id">사용자 ID:</label>
+        <input type="text" id="user_id" name="user_id" required><br><br>
+
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">로그인</button>
+    </form>
+
+    <hr>
+    <div>
+        <h1>사용자 데이터 업데이트</h1>
+        <form onsubmit="updateUserData(event)">
+            <label for="title">title(뭐바꿀거):</label>
+            <input type="text" id="title" name="title" required><br><br>
+
+            <label for="string_data">string(바꿀내용):</label>
+            <textarea id="string_data" name="string_data" required></textarea><br><br>
+
+            <button type="submit">업데이트</button>
+        </form>
+    <div>
+        
+
+        <h1>안전교육생성!</h1>
+    <form action="http://211.237.0.230:10123/create/CreateSafetyEducation/" method="post" enctype="multipart/form-data">
+        <!-- CSRF Token -->
+        
+
+        <label for="co_Num">co_Num:</label>
+        <input type="text" id="co_Num" name="co_Num" required><br><br>
+        
+        <label for="educationDate">educationDate:</label>
+        <input type="date" id="educationDate" name="educationDate" required><br><br>
+        
+        <label for="startEducationTime">startEducationTime:</label>
+        <input type="time" id="startEducationTime" name="startEducationTime" required><br><br>
+        
+        <label for="endEducationTime">endEducationTime:</label>
+        <input type="time" id="endEducationTime" name="endEducationTime" required><br><br>
+        
+        <label for="manager">manager:</label>
+        <input type="text" id="manager" name="manager" required><br><br>
+        
+        <label for="place">place:</label>
+        <input type="text" id="place" name="place" required><br><br>
+        
+        <label for="detail">detail:</label>
+        <input type="text" id="detail" name="detail" required><br><br>
+        
+        <label for="title">title:</label>
+        <input type="text" id="title" name="title" required><br><br>
+        
+        <label for="peopleListPic">peopleListPic:</label>
+        <input type="file" id="peopleListPic" name="peopleListPic"><br><br>
+        
+        <label for="placePic">placePic:</label>
+        <input type="file" id="placePic" name="placePic"><br><br>
+        
+        <input type="submit" value="쏴라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+    </form>
+</body>
+
+
+<h1>solution 생성!</h1>
+    <form action="http://211.237.0.230:10123/create/CreateProblemDetail/" method="post" enctype="multipart/form-data">
+        <!-- CSRF Token -->
+        
+
+        <label for="co_Num">co_Num:</label>
+        <input type="text" id="co_Num" name="co_Num" ><br><br>
+        
+        <label for="dangerSolutionAfter">dangerSolutionAfter:</label>
+        <input type="text" id="dangerSolutionAfter" name="dangerSolutionAfter" ><br><br>
+        
+        <label for="dangerSolutionBefore">dangerSolutionBefore:</label>
+        <input type="text" id="dangerSolutionBefore" name="dangerSolutionBefore" ><br><br>
+        
+        <label for="record">record:</label>
+        <input type="date" id="record" name="record" ><br><br>
+        
+        <label for="place">place:</label>
+        <input type="text" id="place" name="place" ><br><br>
+        
+        <label for="workStep">workStep:</label>
+        <input type="text" id="workStep" name="workStep" ><br><br>
+        
+        <label for="frequency">frequency:</label>
+        <input type="number" id="frequency" name="frequency" ><br><br>
+        
+        <label for="strength">strength:</label>
+        <input type="number" id="strength" name="strength" ><br><br>
+
+         <label for="riskScore">riskScore:</label>
+        <input type="number" id="riskScore" name="riskScore"><br><br>
+
+        <label for="writer">writer:</label>
+        <input type="text" id="writer" name="writer"><br><br>
+
+        <label for="work">work:</label>
+        <input type="text" id="work" name="work"><br><br>
+
+        <label for="pic_before">pic_before:</label>
+        <input type="text" id="pic_before" name="pic_before"><br><br>
+
+        <label for="pic_after">pic_after:</label>
+        <input type="file" id="picAfter" name="pic_after"><br><br>
+
+        <label for="is_last">is_last:</label>
+        <input type="text" id="is_last" name="is_last"><br><br>
+        
+       
+        
+        <input type="submit" value="쏴라!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!">
+    </form>
+    <h1>사용자 사진등록</h1>
+    <form action="http://211.237.0.230:10123/profile/UploadUserProfile/" method="post" enctype="multipart/form-data">
+        
+
+        <label for="profile">profile:</label>
+        <input type="file" id="profile" name="profile" required><br><br>
+        
+
+        <button type="submit">발사</button>
+    </form>
+
+    <h1>사용자 사진조회</h1>
+    <form action="http://211.237.0.230:10123/profile/GetUserProfile/" method="post">
+        <label for="user_id">user_id:</label>
+        <input type="text" id="user_id" name="user_id" required><br><br>
+
+        
+        
+
+        <button type="submit">발사</button>
+    </form>
+
+    <h1>사용자 사진삭제</h1>
+    <form action="http://211.237.0.230:10123/profile/DeleteUserProfile/" method="post">
+        <label for="user_id">user_id:</label>
+        <input type="text" id="user_id" name="user_id" required><br><br>
+
+        
+        
+
+        <button type="submit">발사</button>
+    </form>
+
+
+
+    <h1>Upload Profile Picture</h1>
+<form id="uploadForm"method="post"  enctype="multipart/form-data">
+    <label for="profile">Choose profile picture:</label>
+    <input type="file" id="profile" name="profile" required><br><br>
+
+    <button type="submit">Upload</button>
+</form>
+
+<p id="response"></p>
+
+<script>
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData();
+        const profilePicture = document.getElementById('profile').files[0];
+
+        if (!profilePicture) {
+            document.getElementById('response').textContent = 'No file selected.';
+            return;
+        }
+
+        formData.append('profile', profilePicture);
+
+        const accessToken = sessionStorage.getItem('access');
+
+        fetch('http://211.237.0.230:10123/profile/UploadUserProfile/', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${accessToken}`  // Bearer 토큰 방식으로 접근 토큰 포함
+                // 'Content-Type': 'multipart/form-data' 는 제거합니다.
+            },
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => { throw new Error(text) });
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('response').textContent = JSON.stringify(data);
+        })
+        .catch(error => {
+            document.getElementById('response').textContent = 'Error: ' + error.message;
+        });
+    });
+</script>
+</body>
+</html>
