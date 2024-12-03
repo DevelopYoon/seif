@@ -1,0 +1,182 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seif - 안전진단 앱</title>
+    <link rel="icon" href="{% static 'img/favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #575757;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: flex;
+            width: 100%;
+            bottom: 0;
+        }
+        .menu-button {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .menu-button:hover {
+            background-color: #20B9FC;
+        }
+                /* 애니메이션을 위한 keyframes 정의 */
+                @keyframes rainbow {
+            0% { color: red; }
+            16.67% { color: #FF8C00; }
+            33.33% { color: #FFD700; }
+            50% { color: green; }
+            66.67% { color: blue; }
+            83.33% { color: indigo; }
+            100% { color: violet; }
+        }
+
+        /* ↑ 기호에 애니메이션 적용 */
+        .colorful-arrow {
+            animation: rainbow 1s linear infinite; /* 2초마다 색상이 바뀌고 무한 반복 */
+        }
+
+        .moving-image {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            animation: move 4s infinite;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(-100px);
+            }
+            25% {
+                transform: translateX(100px);
+            }
+            50% {
+                transform: translateX(100px) scaleX(-1);
+            }
+            75% {
+                transform: translateX(-100px);
+            }
+            100% {
+                transform: translateX(-100px) scaleX(-1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SEIF</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/quit">회원탈퇴</a>
+            <a href="/personal_information">개인정보처리방침</a>
+        </nav>
+    </header>
+    <main>
+        <container>
+            <h2 id="animated-text"></h2>
+            <a href="https://maeivs.github.io/seif-manager-web/">
+                <img src="{% static 'img/SeifCat-rb.png' %}" alt="안전한 일터" class="moving-image">
+            </a>
+            <h3>
+                <a href="https://maeivs.github.io/seif-manager-web/">중대재해 웹 페이지 이동</a>
+            </h3>
+            <h4>
+                <span class="colorful-arrow">↑</span>&nbsp;&nbsp;
+                <span class="colorful-arrow">↑</span>&nbsp;&nbsp;
+                <span class="colorful-arrow">↑</span>&nbsp;&nbsp;
+                <span class="colorful-arrow">눌러서 접속</span>&nbsp;&nbsp;
+                <span class="colorful-arrow">↑</span>&nbsp;&nbsp;
+                <span class="colorful-arrow">↑</span>&nbsp;&nbsp;
+                <span class="colorful-arrow">↑</span>
+            </h4>
+        </container>
+
+    </main>
+    <footer>
+        <div class="mb-4">
+            <div class="d-flex">
+                <p class="mb-2">경기도 수원시 영통구 광교중앙로248번길 7-7, 이음센터 5층</p>
+            </div>                        
+            <div class="d-flex">
+                <p class="mb-2"><i class='bi bi-envelope'></i> : safe114@elimsafety.com  <i class='bi bi-telephone'></i> : 1660-1140  <i class='bi bi-printer'></i> : 031-212-9002</p>
+            </div>                         
+
+        </div>
+        <p class="mb-1" style="font-size: 12px;">개인정보보호책임자 : 강명석<a href="mailto:nicekang88@elimsafety.com" style="color:#ffffff;">(nicekang88@elimsafety.com)</a></p>
+        <div class="col">
+            <div class="col-auto-2">
+                <div class="accordion accordion-flush">
+                    <div class="accordion-item">
+                        <div id="flush-collapseOne" class="accordion-collapse collapse">
+                            <div class="accordion-body">
+                                <p class="mb-0" style="font-size: 14px;">엘림주식회사  사업자번호 : 717-86-00698</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>&copy; Elim Corp. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const text = "안전하고 건강한 일터를 만드는 어플리케이션";
+        const textElement = document.getElementById("animated-text");
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                textElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 200);
+            } else {
+                setTimeout(() => {
+                    index = 0;
+                    textElement.innerHTML = "";
+                    typeWriter();
+                }, 1000);
+            }
+        }
+
+        typeWriter();
+    </script>
+</body>
+</html>
